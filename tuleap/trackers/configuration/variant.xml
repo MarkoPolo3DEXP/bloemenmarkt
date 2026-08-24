@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tracker id="T4" parent_id="0" instantiate_for_new_projects="0">
+  <name><![CDATA[Variant]]></name>
+  <item_name>variant</item_name>
+  <description><![CDATA[Variant: a complete feature selection (bill-of-features) for one specific Product, in the sense of a "configured variant" as used in ISO/IEC 26580 - not to be confused with the resolution of a single variation point, which is the more common automotive usage of the term. Each Variant links to exactly one Product and to the Feature artifacts it selects, using the default "Related to" nature (custom link natures such as is_variant_of/selects are deferred pending site-admin access). The product_code field denormalizes the linked Product's code for easier filtering and reporting.]]></description>
+  <color>clockwork-orange</color>
+  <cannedResponses/>
+  <formElements>
+    <formElement type="aid" ID="F1" rank="0">
+      <name>id</name>
+      <label><![CDATA[Id]]></label>
+    </formElement>
+    <formElement type="subby" ID="F2" rank="1">
+      <name>submitted_by</name>
+      <label><![CDATA[Submitted by]]></label>
+    </formElement>
+    <formElement type="subon" ID="F3" rank="2">
+      <name>submitted_on</name>
+      <label><![CDATA[Submitted on]]></label>
+    </formElement>
+    <formElement type="lud" ID="F4" rank="3">
+      <name>last_update_date</name>
+      <label><![CDATA[Last modified on]]></label>
+    </formElement>
+    <formElement type="string" ID="F5" rank="4">
+      <name>variant_name</name>
+      <label><![CDATA[Variant name]]></label>
+      <properties size="40"/>
+    </formElement>
+    <formElement type="string" ID="F6" rank="5">
+      <name>product_code</name>
+      <label><![CDATA[Product code]]></label>
+      <description><![CDATA[Denormalized copy of the linked Product's code, for filtering and reporting without having to traverse the Links field.]]></description>
+      <properties size="15"/>
+    </formElement>
+    <formElement type="sb" ID="F7" rank="6">
+      <name>status</name>
+      <label><![CDATA[Status]]></label>
+      <bind type="static" is_rank_alpha="0">
+        <items>
+          <item ID="V1" label="Draft" is_hidden="0"/>
+          <item ID="V2" label="Active" is_hidden="0"/>
+          <item ID="V3" label="Retired" is_hidden="0"/>
+        </items>
+      </bind>
+    </formElement>
+    <formElement type="text" ID="F8" rank="7">
+      <name>description</name>
+      <label><![CDATA[Description]]></label>
+      <properties rows="10" cols="60"/>
+    </formElement>
+    <formElement type="art_link" ID="F9" rank="8">
+      <name>art_link</name>
+      <label><![CDATA[Links]]></label>
+      <description><![CDATA[Link to exactly one Product, and to every Feature artifact selected by this variant.]]></description>
+    </formElement>
+  </formElements>
+  <semantics>
+    <semantic type="title">
+      <shortname>title</shortname>
+      <label>Title</label>
+      <description>Define the title of an artifact</description>
+      <field REF="F5"/>
+    </semantic>
+    <semantic type="description">
+      <shortname>description</shortname>
+      <label>Description</label>
+      <description>Define the description of an artifact</description>
+      <field REF="F8"/>
+    </semantic>
+    <semantic type="status">
+      <shortname>status</shortname>
+      <label>Status</label>
+      <description>Define the status of an artifact</description>
+      <field REF="F7"/>
+      <open_values>
+        <open_value REF="V1"/>
+        <open_value REF="V2"/>
+      </open_values>
+    </semantic>
+  </semantics>
+  <rules>
+    <date_rules/>
+    <list_rules/>
+  </rules>
+  <reports>
+    <report is_default="1">
+      <name>Default</name>
+      <description>Default report</description>
+      <criterias>
+        <criteria rank="0">
+          <field REF="F6"/>
+        </criteria>
+        <criteria rank="1">
+          <field REF="F7"/>
+        </criteria>
+      </criterias>
+      <renderers>
+        <renderer type="table" rank="0" chunksz="15">
+          <name>Results</name>
+          <columns>
+            <field REF="F1"/>
+            <field REF="F5"/>
+            <field REF="F6"/>
+            <field REF="F7"/>
+          </columns>
+        </renderer>
+      </renderers>
+    </report>
+  </reports>
+  <workflow/>
+  <permissions>
+    <permission scope="tracker" ugroup="UGROUP_PROJECT_ADMIN" type="PLUGIN_TRACKER_ADMIN"/>
+    <permission scope="tracker" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_ACCESS_FULL"/>
+    <permission scope="field" REF="F5" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_READ"/>
+    <permission scope="field" REF="F5" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_SUBMIT"/>
+    <permission scope="field" REF="F5" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_UPDATE"/>
+    <permission scope="field" REF="F6" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_READ"/>
+    <permission scope="field" REF="F6" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_SUBMIT"/>
+    <permission scope="field" REF="F6" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_UPDATE"/>
+    <permission scope="field" REF="F7" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_READ"/>
+    <permission scope="field" REF="F7" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_SUBMIT"/>
+    <permission scope="field" REF="F7" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_UPDATE"/>
+    <permission scope="field" REF="F8" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_READ"/>
+    <permission scope="field" REF="F8" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_SUBMIT"/>
+    <permission scope="field" REF="F8" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_UPDATE"/>
+    <permission scope="field" REF="F9" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_READ"/>
+    <permission scope="field" REF="F9" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_SUBMIT"/>
+    <permission scope="field" REF="F9" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_UPDATE"/>
+  </permissions>
+</tracker>
