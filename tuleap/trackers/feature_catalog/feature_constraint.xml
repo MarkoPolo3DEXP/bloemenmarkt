@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tracker id="T3" parent_id="0" instantiate_for_new_projects="0">
+  <name><![CDATA[Feature Constraint]]></name>
+  <item_name>feature_constraint</item_name>
+  <description><![CDATA[Reifies a single cross-tree constraint between two Features (Requires or Excludes) as its own artifact, since Tuleap allows only one Artifact Link field per tracker and this project has no site-admin-defined custom link natures. Link the two constrained Features via the Links field; use the Constraint title and Notes to state which one is the source and which is the target.]]></description>
+  <color>fiesta-red</color>
+  <cannedResponses/>
+  <formElements>
+    <formElement type="aid" ID="F1" rank="0">
+      <name>id</name>
+      <label><![CDATA[Id]]></label>
+    </formElement>
+    <formElement type="subby" ID="F2" rank="1">
+      <name>submitted_by</name>
+      <label><![CDATA[Submitted by]]></label>
+    </formElement>
+    <formElement type="subon" ID="F3" rank="2">
+      <name>submitted_on</name>
+      <label><![CDATA[Submitted on]]></label>
+    </formElement>
+    <formElement type="lud" ID="F4" rank="3">
+      <name>last_update_date</name>
+      <label><![CDATA[Last modified on]]></label>
+    </formElement>
+    <formElement type="string" ID="F5" rank="4">
+      <name>constraint_title</name>
+      <label><![CDATA[Constraint]]></label>
+      <description><![CDATA[Short statement of the constraint, direction included, e.g. "Regenerative Braking requires Electric or Hybrid".]]></description>
+      <properties size="60"/>
+    </formElement>
+    <formElement type="sb" ID="F6" rank="5">
+      <name>constraint_type</name>
+      <label><![CDATA[Constraint type]]></label>
+      <bind type="static" is_rank_alpha="0">
+        <items>
+          <item ID="V1" label="Requires" is_hidden="0"/>
+          <item ID="V2" label="Excludes" is_hidden="0"/>
+        </items>
+      </bind>
+    </formElement>
+    <formElement type="text" ID="F7" rank="6">
+      <name>notes</name>
+      <label><![CDATA[Notes]]></label>
+      <description><![CDATA[Optional: clarify which linked Feature is the source and which is the target, and any rationale.]]></description>
+      <properties rows="6" cols="60"/>
+    </formElement>
+    <formElement type="art_link" ID="F8" rank="7">
+      <name>art_link</name>
+      <label><![CDATA[Links]]></label>
+      <description><![CDATA[Link the two Features involved in this constraint.]]></description>
+    </formElement>
+  </formElements>
+  <semantics>
+    <semantic type="title">
+      <shortname>title</shortname>
+      <label>Title</label>
+      <description>Define the title of an artifact</description>
+      <field REF="F5"/>
+    </semantic>
+    <semantic type="description">
+      <shortname>description</shortname>
+      <label>Description</label>
+      <description>Define the description of an artifact</description>
+      <field REF="F7"/>
+    </semantic>
+  </semantics>
+  <rules>
+    <date_rules/>
+    <list_rules/>
+  </rules>
+  <reports>
+    <report is_default="1">
+      <name>Default</name>
+      <description>Default report</description>
+      <criterias>
+        <criteria rank="0">
+          <field REF="F6"/>
+        </criteria>
+      </criterias>
+      <renderers>
+        <renderer type="table" rank="0" chunksz="15">
+          <name>Results</name>
+          <columns>
+            <field REF="F1"/>
+            <field REF="F5"/>
+            <field REF="F6"/>
+          </columns>
+        </renderer>
+      </renderers>
+    </report>
+  </reports>
+  <workflow/>
+  <permissions>
+    <permission scope="tracker" ugroup="UGROUP_PROJECT_ADMIN" type="PLUGIN_TRACKER_ADMIN"/>
+    <permission scope="tracker" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_ACCESS_FULL"/>
+    <permission scope="field" REF="F5" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_READ"/>
+    <permission scope="field" REF="F5" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_SUBMIT"/>
+    <permission scope="field" REF="F5" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_UPDATE"/>
+    <permission scope="field" REF="F6" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_READ"/>
+    <permission scope="field" REF="F6" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_SUBMIT"/>
+    <permission scope="field" REF="F6" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_UPDATE"/>
+    <permission scope="field" REF="F7" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_READ"/>
+    <permission scope="field" REF="F7" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_SUBMIT"/>
+    <permission scope="field" REF="F7" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_UPDATE"/>
+    <permission scope="field" REF="F8" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_READ"/>
+    <permission scope="field" REF="F8" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_SUBMIT"/>
+    <permission scope="field" REF="F8" ugroup="UGROUP_PROJECT_MEMBERS" type="PLUGIN_TRACKER_FIELD_UPDATE"/>
+  </permissions>
+</tracker>
